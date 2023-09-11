@@ -10,7 +10,7 @@ pkgbase=qtcreator
 pkgname=(qtcreator qtcreator-devel)
 pkgver=11.0.2
 _clangver=16.0.6
-pkgrel=1
+pkgrel=2
 pkgdesc='Lightweight, cross-platform integrated development environment'
 arch=(x86_64)
 url='https://www.qt.io'
@@ -29,9 +29,19 @@ optdepends=('qt6-doc: integrated Qt documentation'
             'valgrind: analyze support'
             'perf: performer analyzer'
             'mlocate: locator filter')
-source=(https://download.qt.io/official_releases/qtcreator/${pkgver%.*}/$pkgver/qt-creator-opensource-src-$pkgver.tar.xz)
-sha256sums=('9de9925dfce0ad1e6fcc37af7441e1052dddd15f97206493758d8303479a2d03')
+source=(https://download.qt.io/official_releases/qtcreator/${pkgver%.*}/$pkgver/qt-creator-opensource-src-$pkgver.tar.xz
+        yaml-cpp-0.8-1.patch::https://github.com/qt-creator/qt-creator/commit/170f9acfb41704b68e2ba98690fd6d5e98addd85.patch
+        yaml-cpp-0.8-2.patch::https://github.com/qt-creator/qt-creator/commit/6c9d4a60e00cd00712d739746d9ded34876901a9.patch)
+sha256sums=('9de9925dfce0ad1e6fcc37af7441e1052dddd15f97206493758d8303479a2d03'
+            '40120945417e19e0219cb943dc9cb42398376734f3cc636242e32f47a23deaff'
+            '10f57a1d6a1da5316b6810997d0654de773c5f950cdd67c96691f0dd6a949292')
 options=(docs)
+
+prepare() {
+  cd qt-creator-opensource-src-$pkgver
+  patch -Np1 < ../yaml-cpp-0.8-1.patch
+  patch -Np1 < ../yaml-cpp-0.8-2.patch
+}
 
 build() {
   cmake -B build -S qt-creator-opensource-src-$pkgver \
