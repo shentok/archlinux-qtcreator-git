@@ -25,7 +25,7 @@ optdepends=('qt6-doc: integrated Qt documentation'
             'x11-ssh-askpass: ssh support'
             'git: git support'
             'mercurial: mercurial support'
-            'bzr: bazaar support'
+            'breezy: bazaar support'
             'valgrind: analyze support'
             'perf: performer analyzer'
             'mlocate: locator filter')
