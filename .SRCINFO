@@ -1,0 +1,41 @@
+pkgbase = qtcreator
+	pkgdesc = Lightweight, cross-platform integrated development environment
+	pkgver = 11.0.3
+	pkgrel = 1
+	url = https://www.qt.io
+	arch = x86_64
+	license = GPL3
+	makedepends = cmake
+	makedepends = llvm
+	makedepends = python
+	depends = clang=16.0.6
+	depends = clazy
+	depends = qt6-5compat
+	depends = qt6-quick3d
+	depends = qt6-tools
+	depends = qt6-serialport
+	depends = qt6-shadertools
+	depends = qt6-svg
+	depends = qt6-webengine
+	depends = yaml-cpp
+	optdepends = qt6-doc: integrated Qt documentation
+	optdepends = qt6-examples: welcome page examples
+	optdepends = gdb: debugger
+	optdepends = cmake: cmake project support
+	optdepends = x11-ssh-askpass: ssh support
+	optdepends = git: git support
+	optdepends = mercurial: mercurial support
+	optdepends = breezy: bazaar support
+	optdepends = valgrind: analyze support
+	optdepends = perf: performer analyzer
+	optdepends = mlocate: locator filter
+	options = docs
+	source = https://download.qt.io/official_releases/qtcreator/11.0/11.0.3/qt-creator-opensource-src-11.0.3.tar.xz
+	sha256sums = 5f501e64e836b7e3e50b98b3ebc345b201396a5fd92e49738dabb5e268d5cf1c
+
+pkgname = qtcreator
+
+pkgname = qtcreator-devel
+	pkgdesc = Lightweight, cross-platform integrated development environment (development files)
+	depends = qtcreator
+	optdepends = 
