@@ -48,6 +48,8 @@ optdepends=('qt6-doc: integrated Qt documentation'
 options=(docs)
 
 build() {
+  export CC=/usr/lib/ccache/bin/gcc
+  export CXX=/usr/lib/ccache/bin/g++
   cd $srcdir/../
   cmake -B build -S $srcdir \
     -DCMAKE_INSTALL_PREFIX=/usr \
