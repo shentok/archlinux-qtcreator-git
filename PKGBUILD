@@ -45,12 +45,11 @@ optdepends=('qt6-doc: integrated Qt documentation'
             'valgrind: analyze support'
             'perf: performer analyzer'
             'mlocate: locator filter')
-source=(https://download.qt.io/official_releases/qtcreator/${pkgver%.*}/$pkgver/qt-creator-opensource-src-$pkgver.tar.xz)
-sha256sums=('399ae0dcefa3bd9e01a3f068b93dabe8b39f9b56466c389d1446e5c84c8f7b9f')
 options=(docs)
 
 build() {
-  cmake -B build -S qt-creator-opensource-src-$pkgver \
+  cd $srcdir/../
+  cmake -B build -S $srcdir \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DWITH_DOCS=ON \
@@ -63,11 +62,12 @@ build() {
 }
 
 package_qtcreator() {
+  cd $srcdir/../
   DESTDIR="$pkgdir" cmake --install build
 # Install docs
   cp -r build/share/doc "$pkgdir"/usr/share
 
-  install -Dm644 qt-creator-opensource-src-$pkgver/LICENSE.GPL3-EXCEPT "$pkgdir"/usr/share/licenses/qtcreator/LICENSE.GPL3-EXCEPT
+  install -Dm644 $srcdir/LICENSE.GPL3-EXCEPT "$pkgdir"/usr/share/licenses/qtcreator/LICENSE.GPL3-EXCEPT
 }
 
 package_qtcreator-devel() {
@@ -75,5 +75,6 @@ package_qtcreator-devel() {
   depends=(qtcreator)
   optdepends=()
 
+  cd $srcdir/../
   DESTDIR="$pkgdir" cmake --install build --component Devel
 }
